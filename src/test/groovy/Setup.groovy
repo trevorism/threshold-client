@@ -9,9 +9,6 @@ class Setup {
         new PingingThresholdClient().ping()
         ThresholdClient thresholdClient = new FastThresholdClient()
 
-        thresholdClient.create(new Threshold(name: "ICXXBT", description: "Icon vs Bitcoin stop", operator: "<=", value: 0.00003))
-        thresholdClient.create(new Threshold(name: "ICXXBT", description: "Icon vs Bitcoin breakout", operator: ">=", value: 0.000042))
-
         thresholdClient.create(new Threshold(name: "XRPUSD", description: "Ripple vs USD stop", operator: "<=", value: 0.17))
         thresholdClient.create(new Threshold(name: "XRPUSD", description: "Ripple vs USD breakout", operator: ">=", value: 0.25))
 
@@ -26,6 +23,9 @@ class Setup {
 
         thresholdClient.create(new Threshold(name: "WAVESXBT", description: "Waves vs Bitcoin stop", operator: "<=", value: 0.00011))
         thresholdClient.create(new Threshold(name: "WAVESXBT", description: "Waves vs Bitcoin breakout", operator: ">=", value: 0.00016))
+
+        thresholdClient.create(new Threshold(name: "ICXXBT", description: "Icon vs Bitcoin stop", operator: "<=", value: 0.00003))
+        thresholdClient.create(new Threshold(name: "ICXXBT", description: "Icon vs Bitcoin breakout", operator: ">=", value: 0.000042))
 
         thresholdClient.create(new Threshold(name: "BCHXBT", description: "Bitcoin Cash vs Bitcoin breakout", operator: ">=", value: 0.034))
 
