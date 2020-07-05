@@ -68,7 +68,7 @@ public class PingingThresholdClient implements ThresholdClient {
         return delegate.evaluate(name, value, strategy);
     }
 
-    private void ping() {
+    public void ping() {
         try {
             //ping the API to wake it up since it is not always on
             sendPingRequest();
