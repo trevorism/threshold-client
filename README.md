@@ -8,10 +8,14 @@
 
 Java client for working with threshold to [trevorism threshold](https://github.com/trevorism/threshold)
 
-Current version: 0.0.1
+Current version: 0.1.0
 
 ## How to Use 
 
+```java
+ThresholdClient client = new PingingThresholdClient();
+client.evaluate("thresholdName", 2000, new AlertWhenThresholdMet());
+```
 
 ## How to Build
 `gradle clean build`

@@ -1,6 +1,7 @@
 package com.trevorism.threshold;
 
 import com.trevorism.threshold.model.Threshold;
+import com.trevorism.threshold.strategy.ThresholdMetStrategy;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface ThresholdClient {
     Threshold delete(long id);
 
     List<Threshold> getByName(String name);
-    List<Threshold> evaluate(String name, Double value);
+    boolean evaluate(String name, Double value, ThresholdMetStrategy strategy);
 
 }

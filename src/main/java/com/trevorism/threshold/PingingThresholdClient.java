@@ -4,6 +4,7 @@ import com.trevorism.http.headers.HeadersHttpClient;
 import com.trevorism.http.headers.HeadersJsonHttpClient;
 import com.trevorism.http.util.ResponseUtils;
 import com.trevorism.threshold.model.Threshold;
+import com.trevorism.threshold.strategy.ThresholdMetStrategy;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
 import java.util.List;
@@ -62,9 +63,9 @@ public class PingingThresholdClient implements ThresholdClient {
     }
 
     @Override
-    public List<Threshold> evaluate(String name, Double value) {
+    public boolean evaluate(String name, Double value, ThresholdMetStrategy strategy) {
         ping();
-        return delegate.evaluate(name, value);
+        return delegate.evaluate(name, value, strategy);
     }
 
     private void ping() {
