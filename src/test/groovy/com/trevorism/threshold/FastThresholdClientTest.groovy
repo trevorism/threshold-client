@@ -20,7 +20,7 @@ class FastThresholdClientTest {
         assert result
     }
 
-    @Test
+    //@Test
     void testCreate() {
         Threshold threshold = new Threshold()
         threshold.name = "asdf"
@@ -33,7 +33,7 @@ class FastThresholdClientTest {
         println result
     }
 
-    @Test
+    //@Test
     void testUpdate() {
         Threshold threshold = new Threshold()
         threshold.name = "ggggg"
@@ -43,7 +43,7 @@ class FastThresholdClientTest {
         println result
     }
 
-    @Test
+    //@Test
     void testDelete() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
         def result = defaultThresholdClient.delete(5072080529784832)
