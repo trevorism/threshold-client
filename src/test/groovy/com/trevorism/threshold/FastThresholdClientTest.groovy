@@ -1,23 +1,22 @@
 package com.trevorism.threshold
 
-import com.trevorism.http.headers.HeadersHttpClient
+
+import com.trevorism.https.SecureHttpClient
 import com.trevorism.threshold.model.Threshold
 import com.trevorism.threshold.strategy.NothingWhenThresholdMet
-import org.apache.http.client.methods.CloseableHttpResponse
-import org.apache.http.entity.StringEntity
 import org.junit.Test
 
 class FastThresholdClientTest {
 
-    private final pingResponse = [getEntity: { new StringEntity("pong") }] as CloseableHttpResponse
-    private final listResponse = [getEntity: { new StringEntity('[{"id":"1"}]') }] as CloseableHttpResponse
-    private final singleResponse = [getEntity: { new StringEntity('{"id":"1"}') }] as CloseableHttpResponse
+    private final pingResponse = "pong"
+    private final listResponse = '[{"id":"1"}]'
+    private final singleResponse = '{"id":"1"}'
 
 
     @Test
     void testList() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.headersClient = [get: {url, headers -> return listResponse}] as HeadersHttpClient
+        defaultThresholdClient.secureHttpClient = [get: {url -> return listResponse}] as SecureHttpClient
         def list = defaultThresholdClient.list()
         assert list
     }
@@ -25,7 +24,7 @@ class FastThresholdClientTest {
     @Test
     void testGet() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        def result = defaultThresholdClient.headersClient = [get: {url, headers -> return singleResponse}] as HeadersHttpClient
+        def result = defaultThresholdClient.secureHttpClient = [get: {url -> return singleResponse}] as SecureHttpClient
         assert result
     }
 
@@ -38,7 +37,7 @@ class FastThresholdClientTest {
         threshold.description = "test"
 
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.headersClient = [post: {url, obj, headers -> return singleResponse}] as HeadersHttpClient
+        defaultThresholdClient.secureHttpClient = [post: {url, obj -> return singleResponse}] as SecureHttpClient
 
         def result = defaultThresholdClient.create(threshold)
         assert result
@@ -50,7 +49,7 @@ class FastThresholdClientTest {
         threshold.name = "ggggg"
 
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.headersClient = [put: {url, obj, headers -> return singleResponse}] as HeadersHttpClient
+        defaultThresholdClient.secureHttpClient = [put: {url, obj -> return singleResponse}] as SecureHttpClient
 
         def result = defaultThresholdClient.update(5072080529784832, threshold)
         assert result
@@ -59,14 +58,14 @@ class FastThresholdClientTest {
     @Test
     void testDelete() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        def result = defaultThresholdClient.headersClient = [delete: {url, headers -> return singleResponse}] as HeadersHttpClient
+        def result = defaultThresholdClient.secureHttpClient = [delete: {url -> return singleResponse}] as SecureHttpClient
         assert result
     }
 
     @Test
     void testGetByName() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.headersClient = [get: {url, headers -> return listResponse}] as HeadersHttpClient
+        defaultThresholdClient.secureHttpClient = [get: {url -> return listResponse}] as SecureHttpClient
         def result = defaultThresholdClient.getByName("test")
         assert result
     }
@@ -74,8 +73,9 @@ class FastThresholdClientTest {
     @Test
     void testEvaluate() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.headersClient = [get: {url, headers -> return listResponse}] as HeadersHttpClient
+        defaultThresholdClient.secureHttpClient = [get: {url -> return listResponse}] as SecureHttpClient
         def result = defaultThresholdClient.evaluate("test", 7, new NothingWhenThresholdMet())
         assert result
     }
+
 }

@@ -28,7 +28,6 @@ public class EventWhenThresholdMet implements ThresholdMetStrategy {
             return false;
         }
 
-
         for (Threshold threshold : metThresholds) {
             TriggeredThreshold tt = TriggeredThreshold.copyFrom(threshold);
             tt.setTriggerValue(value);
