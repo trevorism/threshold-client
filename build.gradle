@@ -6,7 +6,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'com.trevorism:gradle-release-plugin:0.3.0'
+		classpath 'com.trevorism:gradle-release-plugin:0.4.0'
 	}
 }
 
@@ -26,12 +26,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.trevorism:secure-http-utils:0.1.0'
+	implementation 'com.trevorism:secure-http-utils:0.7.0'
 	implementation 'com.google.code.gson:gson:2.8.6'
 
-	implementation 'com.trevorism:eventhub-client:2.0.0'
+	implementation 'com.trevorism:eventhub-client:2.3.0'
 
-	testCompile 'junit:junit:4.13'
+	testCompile 'junit:junit:4.13.1'
 	testCompile 'org.codehaus.groovy:groovy-all:2.5.8'
 
 }

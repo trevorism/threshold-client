@@ -3,6 +3,7 @@ package com.trevorism.threshold;
 import com.trevorism.http.headers.HeadersHttpClient;
 import com.trevorism.http.headers.HeadersJsonHttpClient;
 import com.trevorism.http.util.ResponseUtils;
+import com.trevorism.https.SecureHttpClient;
 import com.trevorism.threshold.model.Threshold;
 import com.trevorism.threshold.strategy.ThresholdMetStrategy;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,16 +15,14 @@ public class PingingThresholdClient implements ThresholdClient {
     private static final long DEFAULT_TIMEOUT_MILLIS = 15000;
 
     private final FastThresholdClient delegate;
-    private final long pingTimeout;
     private final HeadersHttpClient headersClient = new HeadersJsonHttpClient();
 
     public PingingThresholdClient() {
-        this(DEFAULT_TIMEOUT_MILLIS);
+        delegate = new FastThresholdClient();
     }
 
-    public PingingThresholdClient(long pingTimeout) {
-        delegate = new FastThresholdClient();
-        this.pingTimeout = pingTimeout;
+    public PingingThresholdClient(SecureHttpClient secureHttpClient) {
+        delegate = new FastThresholdClient(secureHttpClient);
     }
 
     @Override
@@ -74,7 +73,7 @@ public class PingingThresholdClient implements ThresholdClient {
             sendPingRequest();
         } catch (Exception e) {
             try {
-                Thread.sleep(pingTimeout);
+                Thread.sleep(DEFAULT_TIMEOUT_MILLIS);
                 sendPingRequest();
             } catch (Exception ie) {
                 throw new RuntimeException("Interrupted failure", ie);

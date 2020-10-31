@@ -12,8 +12,17 @@ import java.util.List;
 
 public class FastThresholdClient implements ThresholdClient {
 
-    private SecureHttpClient secureHttpClient = new DefaultSecureHttpClient();
+    private SecureHttpClient secureHttpClient;
     private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create();
+
+    public FastThresholdClient() {
+        secureHttpClient = new DefaultSecureHttpClient();
+    }
+
+    public FastThresholdClient(SecureHttpClient secureHttpClient) {
+        this.secureHttpClient = secureHttpClient;
+    }
+
 
     @Override
     public List<Threshold> list() {
