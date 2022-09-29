@@ -1,7 +1,6 @@
 package com.trevorism.threshold.strategy
 
 import com.trevorism.event.EventProducer
-import com.trevorism.threshold.model.Alert
 import com.trevorism.threshold.model.Threshold
 import org.junit.Test
 

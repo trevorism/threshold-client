@@ -23,7 +23,6 @@ public class FastThresholdClient implements ThresholdClient {
         this.secureHttpClient = secureHttpClient;
     }
 
-
     @Override
     public List<Threshold> list() {
         String json = secureHttpClient.get(THRESHOLD_BASE_URL + "/threshold");
