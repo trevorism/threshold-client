@@ -1,8 +1,7 @@
 package com.trevorism.threshold.strategy;
 
-import com.trevorism.event.EventProducer;
-import com.trevorism.event.PingingEventProducer;
-import com.trevorism.threshold.model.Alert;
+import com.trevorism.AlertClient;
+import com.trevorism.model.Alert;
 import com.trevorism.threshold.model.Threshold;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.UUID;
 public class AlertWhenThresholdMet implements ThresholdMetStrategy {
 
     private String correlationId;
-    private EventProducer<Alert> producer;
+    private AlertClient alertClient;
 
     public AlertWhenThresholdMet() {
         this(UUID.randomUUID().toString());
@@ -19,7 +18,7 @@ public class AlertWhenThresholdMet implements ThresholdMetStrategy {
 
     public AlertWhenThresholdMet(String correlationId) {
         this.correlationId = correlationId;
-        producer = new PingingEventProducer<>();
+        this.alertClient = new AlertClient();
     }
 
     @Override
@@ -29,7 +28,7 @@ public class AlertWhenThresholdMet implements ThresholdMetStrategy {
         }
 
         Alert alert = createAlert(metThresholds, value);
-        producer.sendEvent("alert", alert, correlationId);
+        alertClient.sendAlert(alert, correlationId);
 
         correlationId = UUID.randomUUID().toString();
         return true;
