@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ThresholdClient {
 
-    String THRESHOLD_BASE_URL = "https://threshold.datastore.trevorism.com";
+    String THRESHOLD_BASE_URL = "https://threshold.action.trevorism.com";
 
     List<Threshold> list();
     Threshold get(long id);

@@ -23,47 +23,41 @@ public class PingingThresholdClient implements ThresholdClient {
 
     public PingingThresholdClient(SecureHttpClient secureHttpClient) {
         delegate = new FastThresholdClient(secureHttpClient);
+        ping();
     }
 
     @Override
     public List<Threshold> list() {
-        ping();
         return delegate.list();
     }
 
     @Override
     public Threshold get(long id) {
-        ping();
         return delegate.get(id);
     }
 
     @Override
     public Threshold create(Threshold threshold) {
-        ping();
         return delegate.create(threshold);
     }
 
     @Override
     public Threshold update(long id, Threshold threshold) {
-        ping();
         return delegate.update(id, threshold);
     }
 
     @Override
     public Threshold delete(long id) {
-        ping();
         return delegate.delete(id);
     }
 
     @Override
     public List<Threshold> getByName(String name) {
-        ping();
         return delegate.getByName(name);
     }
 
     @Override
     public boolean evaluate(String name, Double value, ThresholdMetStrategy strategy) {
-        ping();
         return delegate.evaluate(name, value, strategy);
     }
 
