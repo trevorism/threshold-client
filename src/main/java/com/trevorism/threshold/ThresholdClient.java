@@ -18,4 +18,5 @@ public interface ThresholdClient {
     List<Threshold> getByName(String name);
     boolean evaluate(String name, Double value, ThresholdMetStrategy strategy);
 
+    void ping();
 }

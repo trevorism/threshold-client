@@ -1,7 +1,6 @@
 package com.trevorism.threshold
 
-
-import com.trevorism.https.SecureHttpClient
+import com.trevorism.http.HttpClient
 import com.trevorism.threshold.model.Threshold
 import com.trevorism.threshold.strategy.NothingWhenThresholdMet
 import org.junit.Test
@@ -16,7 +15,7 @@ class FastThresholdClientTest {
     @Test
     void testList() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.secureHttpClient = [get: {url -> return listResponse}] as SecureHttpClient
+        defaultThresholdClient.httpClient = [get: {url -> return listResponse}] as HttpClient
         def list = defaultThresholdClient.list()
         assert list
     }
@@ -24,7 +23,7 @@ class FastThresholdClientTest {
     @Test
     void testGet() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        def result = defaultThresholdClient.secureHttpClient = [get: {url -> return singleResponse}] as SecureHttpClient
+        def result = defaultThresholdClient.httpClient = [get: {url -> return singleResponse}] as HttpClient
         assert result
     }
 
@@ -37,7 +36,7 @@ class FastThresholdClientTest {
         threshold.description = "test"
 
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.secureHttpClient = [post: {url, obj -> return singleResponse}] as SecureHttpClient
+        defaultThresholdClient.httpClient = [post: {url, obj -> return singleResponse}] as HttpClient
 
         def result = defaultThresholdClient.create(threshold)
         assert result
@@ -49,7 +48,7 @@ class FastThresholdClientTest {
         threshold.name = "ggggg"
 
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.secureHttpClient = [put: {url, obj -> return singleResponse}] as SecureHttpClient
+        defaultThresholdClient.httpClient = [put: {url, obj -> return singleResponse}] as HttpClient
 
         def result = defaultThresholdClient.update(5072080529784832, threshold)
         assert result
@@ -58,14 +57,14 @@ class FastThresholdClientTest {
     @Test
     void testDelete() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        def result = defaultThresholdClient.secureHttpClient = [delete: {url -> return singleResponse}] as SecureHttpClient
+        def result = defaultThresholdClient.httpClient = [delete: {url -> return singleResponse}] as HttpClient
         assert result
     }
 
     @Test
     void testGetByName() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.secureHttpClient = [get: {url -> return listResponse}] as SecureHttpClient
+        defaultThresholdClient.httpClient = [get: {url -> return listResponse}] as HttpClient
         def result = defaultThresholdClient.getByName("test")
         assert result
     }
@@ -73,7 +72,7 @@ class FastThresholdClientTest {
     @Test
     void testEvaluate() {
         ThresholdClient defaultThresholdClient = new FastThresholdClient()
-        defaultThresholdClient.secureHttpClient = [get: {url -> return listResponse}] as SecureHttpClient
+        defaultThresholdClient.httpClient = [get: {url -> return listResponse}] as HttpClient
         def result = defaultThresholdClient.evaluate("test", 7, new NothingWhenThresholdMet())
         assert result
     }
