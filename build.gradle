@@ -34,9 +34,9 @@ repositories {
 }
 
 dependencies {
-	implementation 'com.trevorism:secure-http-utils:2.0.1'
+	implementation 'com.trevorism:secure-http-utils:3.1.0'
 	implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.trevorism:reactions-client:0.4.1'
+    implementation 'com.trevorism:reactions-client:0.6.0'
 
 	testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.codehaus.groovy:groovy-all:2.5.21'

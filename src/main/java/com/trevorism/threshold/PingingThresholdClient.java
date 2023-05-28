@@ -1,15 +1,15 @@
 package com.trevorism.threshold;
 
-import com.trevorism.http.HttpClient;
-import com.trevorism.https.DefaultSecureHttpClient;
+import com.trevorism.https.AppClientSecureHttpClient;
+import com.trevorism.https.SecureHttpClient;
 
 public class PingingThresholdClient extends FastThresholdClient {
 
     public PingingThresholdClient() {
-        this(new DefaultSecureHttpClient());
+        this(new AppClientSecureHttpClient());
     }
 
-    public PingingThresholdClient(HttpClient httpClient) {
+    public PingingThresholdClient(SecureHttpClient httpClient) {
         super(httpClient);
         ping();
     }

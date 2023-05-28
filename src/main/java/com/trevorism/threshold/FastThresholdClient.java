@@ -3,8 +3,8 @@ package com.trevorism.threshold;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.trevorism.http.HttpClient;
-import com.trevorism.https.DefaultSecureHttpClient;
+import com.trevorism.https.AppClientSecureHttpClient;
+import com.trevorism.https.SecureHttpClient;
 import com.trevorism.threshold.model.Threshold;
 import com.trevorism.threshold.strategy.ThresholdMetStrategy;
 
@@ -13,14 +13,14 @@ import java.util.List;
 public class FastThresholdClient implements ThresholdClient {
 
     private static final long DEFAULT_TIMEOUT_MILLIS = 15000;
-    private HttpClient httpClient;
+    private SecureHttpClient httpClient;
     private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").create();
 
     public FastThresholdClient() {
-        httpClient = new DefaultSecureHttpClient();
+        httpClient = new AppClientSecureHttpClient();
     }
 
-    public FastThresholdClient(HttpClient httpClient) {
+    public FastThresholdClient(SecureHttpClient httpClient) {
         this.httpClient = httpClient;
     }
 

@@ -1,24 +1,18 @@
 package com.trevorism.threshold.strategy;
 
 import com.trevorism.AlertClient;
+import com.trevorism.https.SecureHttpClient;
 import com.trevorism.model.Alert;
 import com.trevorism.threshold.model.Threshold;
 
 import java.util.List;
-import java.util.UUID;
 
 public class AlertWhenThresholdMet implements ThresholdMetStrategy {
 
-    private String correlationId;
     private AlertClient alertClient;
 
-    public AlertWhenThresholdMet() {
-        this(UUID.randomUUID().toString());
-    }
-
-    public AlertWhenThresholdMet(String correlationId) {
-        this.correlationId = correlationId;
-        this.alertClient = new AlertClient();
+    public AlertWhenThresholdMet(SecureHttpClient client){
+        this.alertClient = new AlertClient(client);
     }
 
     @Override
@@ -28,9 +22,7 @@ public class AlertWhenThresholdMet implements ThresholdMetStrategy {
         }
 
         Alert alert = createAlert(metThresholds, value);
-        alertClient.sendAlert(alert, correlationId);
-
-        correlationId = UUID.randomUUID().toString();
+        alertClient.sendAlert(alert);
         return true;
     }
 
